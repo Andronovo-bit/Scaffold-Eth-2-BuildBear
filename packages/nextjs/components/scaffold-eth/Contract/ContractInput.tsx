@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import InputSelect from "../Input/InputSelect";
 import { AbiParameter } from "abitype";
 import {
   AddressInput,
@@ -29,7 +30,15 @@ export const ContractInput = ({ setForm, form, stateObjectKey, paramType }: Cont
     },
   };
 
-  if (paramType.type === "address") {
+  if (
+    stateObjectKey === "frontrun__token0_address_address" ||
+    stateObjectKey === "frontrun__token1_address_address" ||
+    stateObjectKey === "flashloan_from_Token_address_address" ||
+    stateObjectKey === "flashloan_to_Token_address_address" ||
+    stateObjectKey === "withdrawToken_tokenAddress_address_address"
+  ) {
+    return <InputSelect {...inputProps} />;
+  } else if (paramType.type === "address") {
     return <AddressInput {...inputProps} />;
   } else if (paramType.type === "bytes32") {
     return <Bytes32Input {...inputProps} />;
